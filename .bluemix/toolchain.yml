@@ -1,9 +1,25 @@
-name: "Multiple Deployment Options"
-description: "Deploy Fibonacci application in Multiple Deployment Options to test and compare the different compute options."
+version: '2'
+messages:
+  $i18n: locales.yml
+template:
+  name: "Multiple Deployment Options"
+  description: "Deploy Fibonacci application in Multiple Deployment Options to test and compare the different compute options."
+  header: '![](toolchain.svg?localize)'
+  icon: icon.svg
+  required:
+    - sample-build
+    - sample-repo
+  info:
+    git url: >-
+      [https://github.com/open-toolchain/simple-toolchain](https://github.com/open-toolchain/simple-toolchain)
+    git branch: >-
+      [master](https://github.com/open-toolchain/simple-toolchain/tree/master)
+toolchain:
+  name: 'simple-toolchain-{{timestamp}}'
+  template:
+    getting_started:
+      $ref: "#/messages/template.gettingStarted"
 
-required:
-  - sample-build
-  - sample-repo
 
 services:
   sample-repo:
