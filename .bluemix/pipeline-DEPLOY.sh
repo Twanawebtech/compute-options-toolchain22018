@@ -27,30 +27,8 @@ figlet 'Web app'
 
 # Push app
 cd service
-
-if [ -z "$CF_APP_HOSTNAME" ]; then
-  echo 'CF_APP_HOSTNAME was not set in the pipeline. Using CF_APP as hostname.'
-  export CF_APP_HOSTNAME=$CF_APP
-fi
-
-if [ -z "$CF_APP_INSTANCES" ]; then
-  echo 'CF_APP_INSTANCES was not set in the pipeline. Using 1 as default value.'
-  export CF_APP_INSTANCES=1
-fi
-
 if ! cf app $CF_APP; then
-  cf push $CF_APP -i $CF_APP_INSTANCES --hostname $CF_APP_HOSTNAME --no-start
-  cf set-env $CF_APP CLOUDANT_db "${CLOUDANT_db}"
-  if [ ! -z "$USE_API_CACHE" ]; then
-    cf set-env $CF_APP USE_API_CACHE true
-  fi
-  if [ -z "$ADMIN_USERNAME" ]; then
-    echo 'No admin username configured'
-  else
-    cf set-env $CF_APP ADMIN_USERNAME "${ADMIN_USERNAME}"
-    cf set-env $CF_APP ADMIN_PASSWORD "${ADMIN_PASSWORD}"
-  fi
-  cf start $CF_APP
+  cf push $CF_APP
 else
   OLD_CF_APP=${CF_APP}-OLD-$(date +"%s")
   rollback() {
@@ -64,22 +42,13 @@ else
   }
   set -e
   trap rollback ERR
-  figlet -f small 'Deploy new version'
   cf rename $CF_APP $OLD_CF_APP
-  cf push $CF_APP -i $CF_APP_INSTANCES --hostname $CF_APP_HOSTNAME --no-start
-  cf set-env $CF_APP CLOUDANT_db "${CLOUDANT_db}"
-  if [ ! -z "$USE_API_CACHE" ]; then
-    cf set-env $CF_APP USE_API_CACHE true
-  fi
-  if [ -z "$ADMIN_USERNAME" ]; then
-    echo 'No admin username configured'
-  else
-    cf set-env $CF_APP ADMIN_USERNAME "${ADMIN_USERNAME}"
-    cf set-env $CF_APP ADMIN_PASSWORD "${ADMIN_PASSWORD}"
-  fi
-  cf start $CF_APP
-  figlet -f small 'Remove old version'
+  cf push $CF_APP
   cf delete $OLD_CF_APP -f
 fi
-
+# Export app name and URL for use in later Pipeline jobs
+export CF_APP_NAME="$CF_APP"
+export APP_URL=http://$(cf app $CF_APP_NAME | grep urls: | awk '{print $2}')
+# View logs
+#cf logs "${CF_APP}" --recent
 figlet -f slant 'Job done!'

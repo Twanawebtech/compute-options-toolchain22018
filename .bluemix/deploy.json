@@ -1,109 +1,110 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Compute Options",
-  "description": "",
-  "longDescription": "The Delivery Pipeline automates the continuous deployment of OpenWhisk Dark Vision including its web user interface and the OpenWhisk artifacts.",
+  "messages": {
+    "$i18n": "locales.yml"
+  },
+  "title": {
+    "$ref": "#/messages/deploy.title"
+  },
+  "description": {
+    "$ref": "#/messages/deploy.description"
+  },
+  "longDescription": {
+    "$ref": "#/messages/deploy.longDescription"
+  },
   "type": "object",
   "properties": {
-    "compute-options-region": {
+    "prod-region": {
       "description": "The bluemix region",
       "type": "string"
     },
-    "compute-options-organization": {
+    "prod-organization": {
       "description": "The bluemix org",
       "type": "string"
     },
-    "compute-options-space": {
+    "prod-space": {
       "description": "The bluemix space",
       "type": "string"
     },
-    "compute-options-app-name": {
-      "description": "The name of the web application.",
-      "type": "string"
-    },
-    "compute-options-admin-username": {
-      "description": "The admin username",
-      "type": "string"
-    },
-    "compute-options-admin-password": {
-      "description": "The admin password",
-      "type": "string"
-    },
-    "compute-options-watson-api-key": {
-      "description": "An existing Visual Recognition API key. Leave it empty to have the toolchain create a new service instance automatically.",
-      "type": "string"
-    },
-    "compute-options-cloudant-db": {
-      "description": "Name of the database used by Dark Vision in the Cloudant service instance.",
-      "type": "string"
+    "prod-app-name": {
+      "description": {
+        "$ref": "#/messages/deploy.appDescription"
+      },
+      "type": "string",
+      "pattern": "\\S"
     }
   },
-  "required": ["compute-options-region", "compute-options-organization", "compute-options-space", "compute-options-app-name", "compute-options-cloudant-db"],
-  "form": [{
+  "required": [
+    "prod-region",
+    "prod-organization",
+    "prod-space",
+    "prod-app-name"
+  ],
+  "form": [
+    {
       "type": "validator",
       "url": "/devops/setup/bm-helper/helper.html"
     },
     {
+      "type": "text",
+      "readonly": false,
+      "title": {
+        "$ref": "#/messages/deploy.appName"
+      },
+      "key": "prod-app-name"
+    },
+    {
       "type": "table",
-      "columnCount": 3,
-      "widths": ["33%", "33%", "33%"],
+      "columnCount": 4,
+      "widths": [
+        "15%",
+        "28%",
+        "28%",
+        "28%"
+      ],
       "items": [
         {
           "type": "label",
-          "title": "Region"
+          "title": ""
         },
         {
           "type": "label",
-          "title": "Organization"
+          "title": {
+            "$ref": "#/messages/region"
+          }
         },
         {
           "type": "label",
-          "title": "Space"
+          "title": {
+            "$ref": "#/messages/organization"
+          }
+        },
+        {
+          "type": "label",
+          "title": {
+            "$ref": "#/messages/space"
+          }
+        },
+        {
+          "type": "label",
+          "title": {
+            "$ref": "#/messages/prodStage"
+          }
         },
         {
           "type": "select",
-          "key": "compute-options-region"
+          "key": "prod-region"
         },
         {
           "type": "select",
-          "key": "compute-options-organization"
+          "key": "prod-organization"
         },
         {
           "type": "select",
-          "key": "compute-options-space",
+          "key": "prod-space",
           "readonly": false
         }
       ]
-    },
-    {
-      "type": "text",
-      "readonly": false,
-      "title": "App name",
-      "key": "compute-options-app-name"
-    },
-    {
-      "type": "text",
-      "readonly": false,
-      "title": "Admin username (used to prevent anonymous uploads, leave empty to allow uploads from any visitor)",
-      "key": "compute-options-admin-username"
-    },
-    {
-      "type": "text",
-      "readonly": false,
-      "title": "Admin password",
-      "key": "compute-options-admin-password"
-    },
-    {
-      "type": "text",
-      "readonly": false,
-      "title": "Watson Visual Recognition API key (leave it empty to provision a new service)",
-      "key": "compute-options-watson-api-key"
-    },
-    {
-      "type": "text",
-      "readonly": false,
-      "title": "Name of the database in the Cloudant service instance",
-      "key": "compute-options-cloudant-db"
     }
   ]
 }
