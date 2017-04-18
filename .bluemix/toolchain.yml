@@ -20,7 +20,6 @@ toolchain:
     getting_started:
       $ref: "#/messages/template.gettingStarted"
 
-
 services:
   sample-repo:
     service_id: githubpublic
