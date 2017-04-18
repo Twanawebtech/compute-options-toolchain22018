@@ -21,7 +21,7 @@ stages:
   - name: OPENWHISK_API_HOST
     value: "openwhisk.ng.bluemix.net"
   - name: DOCKER_EXTRACTOR_NAME
-    value: "l2fprod/darkvision-extractor-master"
+    value: ""
   - name: WATSON_API_KEY
     value: ${WATSON_API_KEY}
   - name: STT_CALLBACK_SECRET

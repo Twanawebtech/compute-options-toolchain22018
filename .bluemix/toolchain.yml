@@ -1,39 +1,40 @@
 ---
-name: "OpenWhisk Dark Vision"
-description: "Deploy your own OpenWhisk Dark Vision environment."
+name: "Multiple Deployment Options"
+description: "Deploy Fibonacci application in Multiple Deployment Options to test and compare the different compute options."
+
 required:
  - deploy
- - darkvision-repo
+ - compute-options-repo
 
 # Github repos
-darkvision-repo:
-  service_id: githubpublic
+compute-options-repo:
+  service_id: compute-options
   parameters:
-    repo_name: "openwhisk-darkvisionapp"
-    repo_url: https://github.com/IBM-Bluemix/openwhisk-darkvisionapp
+    repo_name: "simple-CF-toolchain"
+    repo_url: https://github.com/Twanawebtech/simple-CF-toolchain
     type: fork
     has_issues: true
 
 # Pipelines
-darkvision-build:
+compute-options-build:
   service_id: pipeline
   parameters:
-    name: "darkvision"
+    name: "compute-options"
     ui-pipeline: true
     configuration:
      content: $file(pipeline.yml)
      env:
-      REPO: "darkvision-repo"
-      CF_APP_NAME: "{{deploy.parameters.darkvision-app-name}}"
-      SPACE_NAME: "{{deploy.parameters.darkvision-space}}"
-      ORG_NAME: "{{deploy.parameters.darkvision-organization}}"
-      REGION_ID: "{{deploy.parameters.darkvision-region}}"
-      ADMIN_USERNAME: "{{deploy.parameters.darkvision-admin-username}}"
-      ADMIN_PASSWORD: "{{deploy.parameters.darkvision-admin-password}}"
-      WATSON_API_KEY: "{{deploy.parameters.darkvision-watson-api-key}}"
-      CLOUDANT_db: "{{deploy.parameters.darkvision-cloudant-db}}"
+      REPO: "compute-options-repo"
+      CF_APP_NAME: "{{deploy.parameters.compute-options-app-name}}"
+      SPACE_NAME: "{{deploy.parameters.compute-options-space}}"
+      ORG_NAME: "{{deploy.parameters.compute-options-organization}}"
+      REGION_ID: "{{deploy.parameters.compute-options-region}}"
+      ADMIN_USERNAME: "{{deploy.parameters.compute-options-admin-username}}"
+      ADMIN_PASSWORD: "{{deploy.parameters.compute-options-admin-password}}"
+      WATSON_API_KEY: "{{deploy.parameters.compute-options-watson-api-key}}"
+      CLOUDANT_db: "{{deploy.parameters.compute-options-cloudant-db}}"
      execute: true
-    services: ["darkvision-repo"]
+    services: ["compute-options-repo"]
   hidden: [form, description]
 
 #Deployment
@@ -42,8 +43,8 @@ deploy:
     $ref: deploy.json
   service-category: pipeline
   parameters:
-    darkvision-app-name: "{{name}}"
-    darkvision-admin-username: ""
-    darkvision-admin-password: ""
-    darkvision-watson-api-key: ""
-    darkvision-cloudant-db: "openwhisk-darkvision"
+    compute-options-app-name: "{{name}}"
+    compute-options-admin-username: ""
+    compute-options-admin-password: ""
+    compute-options-watson-api-key: ""
+    compute-options-cloudant-db: ""

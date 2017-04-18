@@ -1,44 +1,44 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "OpenWhisk Dark Vision",
+  "title": "Compute Options",
   "description": "",
   "longDescription": "The Delivery Pipeline automates the continuous deployment of OpenWhisk Dark Vision including its web user interface and the OpenWhisk artifacts.",
   "type": "object",
   "properties": {
-    "darkvision-region": {
+    "compute-options-region": {
       "description": "The bluemix region",
       "type": "string"
     },
-    "darkvision-organization": {
+    "compute-options-organization": {
       "description": "The bluemix org",
       "type": "string"
     },
-    "darkvision-space": {
+    "compute-options-space": {
       "description": "The bluemix space",
       "type": "string"
     },
-    "darkvision-app-name": {
+    "compute-options-app-name": {
       "description": "The name of the web application.",
       "type": "string"
     },
-    "darkvision-admin-username": {
+    "compute-options-admin-username": {
       "description": "The admin username",
       "type": "string"
     },
-    "darkvision-admin-password": {
+    "compute-options-admin-password": {
       "description": "The admin password",
       "type": "string"
     },
-    "darkvision-watson-api-key": {
+    "compute-options-watson-api-key": {
       "description": "An existing Visual Recognition API key. Leave it empty to have the toolchain create a new service instance automatically.",
       "type": "string"
     },
-    "darkvision-cloudant-db": {
+    "compute-options-cloudant-db": {
       "description": "Name of the database used by Dark Vision in the Cloudant service instance.",
       "type": "string"
     }
   },
-  "required": ["darkvision-region", "darkvision-organization", "darkvision-space", "darkvision-app-name", "darkvision-cloudant-db"],
+  "required": ["compute-options-region", "compute-options-organization", "compute-options-space", "compute-options-app-name", "compute-options-cloudant-db"],
   "form": [{
       "type": "validator",
       "url": "/devops/setup/bm-helper/helper.html"
@@ -62,15 +62,15 @@
         },
         {
           "type": "select",
-          "key": "darkvision-region"
+          "key": "compute-options-region"
         },
         {
           "type": "select",
-          "key": "darkvision-organization"
+          "key": "compute-options-organization"
         },
         {
           "type": "select",
-          "key": "darkvision-space",
+          "key": "compute-options-space",
           "readonly": false
         }
       ]
@@ -79,31 +79,31 @@
       "type": "text",
       "readonly": false,
       "title": "App name",
-      "key": "darkvision-app-name"
+      "key": "compute-options-app-name"
     },
     {
       "type": "text",
       "readonly": false,
       "title": "Admin username (used to prevent anonymous uploads, leave empty to allow uploads from any visitor)",
-      "key": "darkvision-admin-username"
+      "key": "compute-options-admin-username"
     },
     {
       "type": "text",
       "readonly": false,
       "title": "Admin password",
-      "key": "darkvision-admin-password"
+      "key": "compute-options-admin-password"
     },
     {
       "type": "text",
       "readonly": false,
       "title": "Watson Visual Recognition API key (leave it empty to provision a new service)",
-      "key": "darkvision-watson-api-key"
+      "key": "compute-options-watson-api-key"
     },
     {
       "type": "text",
       "readonly": false,
       "title": "Name of the database in the Cloudant service instance",
-      "key": "darkvision-cloudant-db"
+      "key": "compute-options-cloudant-db"
     }
   ]
 }
