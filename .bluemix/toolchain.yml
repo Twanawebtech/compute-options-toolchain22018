@@ -4,7 +4,7 @@ messages:
 template:
   name: "Multiple Deployment Options"
   description: "Deploy Fibonacci application in Multiple Deployment Options to test and compare the different compute options."
-  header: '![](toolchain.svg?localize)'
+  header: '![](compute-toolchain.png?localize)'
   icon: icon.svg
   required:
     - sample-build
@@ -45,8 +45,6 @@ services:
           PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
           PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
         execute: true
-  webide:
-    service_id: orion
 form:
   pipeline:
     parameters:
