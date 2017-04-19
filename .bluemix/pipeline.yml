@@ -35,3 +35,4 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-CF.sh
+
