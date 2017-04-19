@@ -34,4 +34,4 @@ stages:
       application: ${CF_APP_NAME}
     script: |-
       #!/bin/bash
-      ./.bluemix/pipeline-DEPLOY.sh
+      ./.bluemix/pipeline-DEPLOY-CF.sh
