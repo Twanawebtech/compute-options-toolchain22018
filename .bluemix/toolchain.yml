@@ -4,6 +4,7 @@ messages:
 template:
   name: "Multiple Deployment Options"
   description: "Deploy Fibonacci application in Multiple Deployment Options to test and compare the different compute options."
+  header: '![]()'
   icon: icon.svg
   required:
     - sample-build
