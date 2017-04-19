@@ -11,11 +11,11 @@ template:
     - sample-repo
   info:
     git url: >-
-      [https://github.com/open-toolchain/simple-toolchain](https://github.com/open-toolchain/simple-toolchain)
+      [https://github.com/Twanawebtech/simple-CF-toolchain](https://github.com/Twanawebtech/simple-CF-toolchain)
     git branch: >-
-      [master](https://github.com/open-toolchain/simple-toolchain/tree/master)
+      [master](https://github.com/Twanawebtech/simple-CF-toolchain/tree/master)
 toolchain:
-  name: 'simple-toolchain-{{timestamp}}'
+  name: 'compute-options-toolchain-{{timestamp}}'
   template:
     getting_started:
       $ref: "#/messages/template.gettingStarted"
@@ -24,7 +24,7 @@ services:
   sample-repo:
     service_id: githubpublic
     parameters:
-      repo_name: "simple-CF-toolchain"
+      repo_name: "compute-options-toolchain"
       repo_url: 'https://github.com/Twanawebtech/simple-CF-toolchain'
       type: fork
       has_issues: true
